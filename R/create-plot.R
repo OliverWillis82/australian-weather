@@ -14,8 +14,18 @@ city = "Sydney"
 scatter_plot = 
 df %>%
   filter(Location == city) %>%
-  ggplot(aes(x = Temp9am, y = Humidity9am),theme_minimal()) + 
-  geom_point(color = "red")
+  ggplot(aes(x = Temp9am, y = Humidity9am)) + 
+  geom_point(color = "red") +
+  theme_minimal()
+
+time_series =
+  df %>%
+  filter(Location == city) %>%
+  ggplot(aes(x = Date, y = Temp9am)) +
+  geom_line()
+ggsave(filename = "graphics/timeseries-rainfall.png",
+       plot = time_series)
+
 
 # Save the plot in graphics/
 ggsave(filename = "graphics/scatter-temp-humidity.png", plot = scatter_plot)
